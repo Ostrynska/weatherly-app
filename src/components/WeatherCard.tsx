@@ -1,5 +1,6 @@
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { formatUnixTimestamp } from '../utils/card/date-utils.ts';
 import {
   EllipsisHorizontalIcon,
   ArrowPathIcon,
@@ -23,43 +24,45 @@ interface Weather {
 interface WeatherCardProps {
   weather: Weather | null;
   selectedCityName: string;
+  // onUpdateWeather: (cityId: number) => void;
 }
 
 const WeatherCard: React.FC<WeatherCardProps> = ({ weather, selectedCityName }) =>
 {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   if (!weather) {
     return <p>Select a city or allow location access to see the weather.</p>;
   }
 
-  const formatUnixTimestamp = (dt: number): string => {
-    const date = new Date(dt * 1000);
-    const options: Intl.DateTimeFormatOptions = {
-      hour: '2-digit',
-      minute: '2-digit',
-      weekday: 'long',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    };
-    return date.toLocaleString('en-GB', options);
-  };
-
   const formattedDate = formatUnixTimestamp(weather.dt);
 
-  // const handleDetailNavigation = () => {
-  //   navigate(`/${weather.id}`);
-  // };
+  const handleDetailNavigation = () => {
+    navigate(`/${weather.id}`);
+  };
 
   return (
     <div className={styles.card}>
       <div className={styles.buttons}>
-        <ArrowPathIcon className={styles.iconButton} />
-        <EllipsisHorizontalIcon
-          className={styles.iconButton}
-          // onClick={handleDetailNavigation}
-        />
+        <ul>
+          <li>
+            <button
+              // onClick={() => onUpdateWeather(weather.id)}
+            >
+              <ArrowPathIcon className={styles.iconButton} />
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={handleDetailNavigation}>
+            <EllipsisHorizontalIcon
+              className={styles.iconButton}
+            />
+            </button>
+          </li>
+        </ul>
+
+
       </div>
 
       <div>

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_KEY = process.env.REACT_APP_API_WEATHER;
 
-export const searchCities = async (cityName) => {
+export const searchCities = async (cityName: string) => {
   const url = 'http://api.openweathermap.org/geo/1.0/direct';
   try {
     const response = await axios.get(url, {
@@ -12,6 +12,8 @@ export const searchCities = async (cityName) => {
         appid: API_KEY,
       },
     });
+    console.log('response.data;', response.data);
+    
     return response.data;
   } catch (error) {
     console.error('Error fetching cities:', error);

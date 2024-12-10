@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import CitySearch from '../../components/CitySearch.tsx';
 import WeatherCard from '../../components/WeatherCard.tsx';
-// import LocationPermissionModal from '../../components/LocationPermission';
 import { getWeather } from '../../api/api.ts';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
+import { addCityWeather } from '../../redux/city/slice.ts';
 
 interface Weather {
   id: number;
@@ -26,66 +28,46 @@ interface City {
 const Home: React.FC = () => {
   const [weather, setWeather] = useState<Weather | null>(null);
   const [selectedCityName, setSelectedCityName] = useState<string>('');
-  // const [showLocationModal, setShowLocationModal] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
 
-  // const fetchWeatherByLocation = (lat: number, lon: number) => {
-  //   getWeather(lat, lon)
-  //     .then((data) => {
-  //       setWeather(data);
-  //       setSelectedCityName(data.name);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching weather by location:', error);
-  //     });
-  // };
-
-  // const handleAllowLocation = () => {
-  //   setShowLocationModal(false);
-  //   if (!navigator.geolocation) {
-  //     alert('Geolocation is not supported by your browser.');
-  //     return;
-  //   }
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       const { latitude, longitude } = position.coords;
-  //       fetchWeatherByLocation(latitude, longitude);
-  //     },
-  //     (error) => {
-  //       console.error('Error getting location:', error);
-  //       alert('Permission to access location was denied.');
-  //     }
-  //   );
-  // };
-
-  // const handleBlockLocation = () => {
-  //   setShowLocationModal(false);
-  //   alert('You denied access to your location.');
-  // };
+  // Отримуємо список міст із Redux
+  const cityList = useAppSelector((state) => state.city.cityList);
 
   const handleCitySelect = async (city: City) => {
     const { lat, lon, name } = city;
-    setSelectedCityName(name);
+    setSelectedCityName(name); // Оновлюємо місто
     try {
       const weatherData = await getWeather(lat, lon);
       setWeather(weatherData);
+      dispatch(addCityWeather({ ...weatherData, name })); // Додаємо дані погоди у Redux
     } catch (error) {
       console.error('Error fetching weather:', error);
     }
   };
 
-  return (
-    <>
-      {/* {showLocationModal && (
-        <LocationPermissionModal
-          onAllow={handleAllowLocation}
-          onBlock={handleBlockLocation}
-        />
-      )} */}
+  useEffect(() => {
+    if (selectedCityName) {
+      console.log('City chosen:', selectedCityName);
+    }
+  }, [selectedCityName]);
 
+  useEffect(() => {
+    if (weather) {
+      console.log('City weather data:', weather);
+    }
+  }, [weather]);
+
+  return (
+    <div>
       <CitySearch onCitySelect={handleCitySelect} />
 
-      <WeatherCard weather={weather} selectedCityName={selectedCityName} />
-    </>
+      {/* Відображаємо список міст як картки */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+        {cityList.map((city) => (
+          <WeatherCard key={city.id} weather={city} selectedCityName={city.name} />
+        ))}
+      </div>
+    </div>
   );
 };
 
