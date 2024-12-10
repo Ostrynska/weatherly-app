@@ -1,0 +1,53 @@
+.card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    border-radius: 15px;
+    display: flex;
+    color: transparent;
+}
+
+.temperature {
+    font-size: 80px;
+    font-weight: bold;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.degree {
+    font-size: 30px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+.city {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: black;
+}
+
+.date {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.icon {
+    font-size: 50px;
+}
+
+.buttons {
+    display: flex;
+}
+
+.iconButton {
+    width: 24px;
+    height: 24px;
+    color: black;
+    margin-right: 10px;
+}
