@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 
 import { ReactComponent as WeatherIcon } from '../../assets/weather-icon.svg';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.content}>

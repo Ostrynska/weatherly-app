@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { searchCities } from '../api/api';
+import { searchCities } from '../api/api.ts';
 
-const CitySearch = ({ onCitySelect }) => {
-  const [cityOptions, setCityOptions] = useState([]);
+interface CityOption {
+  label: string;
+  value: {
+    lat: number;
+    lon: number;
+    name: string;
+  };
+}
 
-  const handleSearch = async (inputValue) => {
-    if (typeof inputValue !== 'string' || inputValue.trim() === '') return;
+interface CitySearchProps {
+  onCitySelect: (city: { lat: number; lon: number; name: string }) => void;
+}
+
+const CitySearch: React.FC<CitySearchProps> = ({ onCitySelect }) => {
+  const [cityOptions, setCityOptions] = useState<CityOption[]>([]);
+
+  const handleSearch = async (inputValue: string) => {
+    if (!inputValue.trim()) return;
 
     try {
       const cities = await searchCities(inputValue);
+
       const uniqueCities = cities.filter(
-        (city, index, self) =>
+        (city: any, index: number, self: any[]) =>
           index ===
           self.findIndex(
             (c) =>
@@ -22,9 +36,9 @@ const CitySearch = ({ onCitySelect }) => {
       );
 
       setCityOptions(
-        uniqueCities.map((city) => ({
+        uniqueCities.map((city: any) => ({
           label: `${city.name}${city.state ? ', ' + city.state : ''}, ${city.country}`,
-          value: { lat: city.lat, lon: city.lon },
+          value: { lat: city.lat, lon: city.lon, name: city.name },
         }))
       );
     } catch (error) {
@@ -32,8 +46,8 @@ const CitySearch = ({ onCitySelect }) => {
     }
   };
 
-  const handleCityChange = (option) => {
-    if (!option || !option.value) return;
+  const handleCityChange = (option: CityOption | null) => {
+    if (!option) return;
     onCitySelect(option.value);
   };
 
@@ -45,6 +59,7 @@ const CitySearch = ({ onCitySelect }) => {
       }}
       options={cityOptions}
       onChange={handleCityChange}
+      isClearable
     />
   );
 };

@@ -1,22 +1,41 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './WeatherCard.module.scss';
-
+// import { useNavigate } from 'react-router-dom';
 import {
   EllipsisHorizontalIcon,
   ArrowPathIcon,
 } from '@heroicons/react/24/outline';
 
-const WeatherCard = ({ weather }) => {
-  const navigate = useNavigate();
+import styles from './WeatherCard.module.scss';
+
+interface Weather {
+  id: number;
+  name: string;
+  dt: number;
+  main: {
+    temp: number;
+  };
+  weather: {
+    icon: string;
+    description: string;
+  }[];
+}
+
+interface WeatherCardProps {
+  weather: Weather | null;
+  selectedCityName: string;
+}
+
+const WeatherCard: React.FC<WeatherCardProps> = ({ weather, selectedCityName }) =>
+{
+  // const navigate = useNavigate();
 
   if (!weather) {
     return <p>Select a city or allow location access to see the weather.</p>;
   }
 
-  const formatUnixTimestamp = (dt) => {
+  const formatUnixTimestamp = (dt: number): string => {
     const date = new Date(dt * 1000);
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
       hour: '2-digit',
       minute: '2-digit',
       weekday: 'long',
@@ -29,9 +48,9 @@ const WeatherCard = ({ weather }) => {
 
   const formattedDate = formatUnixTimestamp(weather.dt);
 
-  const handleDetailNavigation = () => {
-    navigate(`/${weather.id}`);
-  };
+  // const handleDetailNavigation = () => {
+  //   navigate(`/${weather.id}`);
+  // };
 
   return (
     <div className={styles.card}>
@@ -39,9 +58,10 @@ const WeatherCard = ({ weather }) => {
         <ArrowPathIcon className={styles.iconButton} />
         <EllipsisHorizontalIcon
           className={styles.iconButton}
-          onClick={handleDetailNavigation}
+          // onClick={handleDetailNavigation}
         />
       </div>
+
       <div>
         <p className={styles.temperature}>
           {Math.round(weather.main.temp)}
@@ -50,7 +70,7 @@ const WeatherCard = ({ weather }) => {
       </div>
 
       <div>
-        <h2 className={styles.city}>{weather.name}</h2>
+        <h2 className={styles.city}>{selectedCityName || weather.name}</h2>
         <p className={styles.date}>{formattedDate}</p>
       </div>
 
