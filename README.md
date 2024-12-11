@@ -3,6 +3,8 @@
 ### Objective:
 Develop a **Single Page Application (SPA)** to display weather information for selected cities.
 
+![image](https://github.com/user-attachments/assets/b165b13f-eef6-4b2b-9e77-b01f3731699b)
+
 ### Features:
 
 1. **City List with Weather Cards**:
@@ -25,7 +27,8 @@ Develop a **Single Page Application (SPA)** to display weather information for s
 4. **Detailed Weather View** *(Bonus)*:
    - Display a graphical representation of temperature based on its value using hourly forecasts for the current day.
 
----
+![image](https://github.com/user-attachments/assets/73103f9a-af5b-458b-a202-7e60ad64217b)
+
 
 ### Requirements:
 
