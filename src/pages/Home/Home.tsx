@@ -1,24 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import CitySearch from '../../components/CitySearch.tsx';
-import WeatherCard from '../../components/WeatherCard.tsx';
+import Search from '../../components/Search/Search.tsx';
+import WeatherCard from '../../components/WeatherCard/WeatherCard.tsx';
 import { getWeather } from '../../api/api.ts';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { addCityWeather } from '../../redux/city/slice.ts';
+import { addCityWeather, Weather } from '../../redux/city/slice.ts';
 
 import styles from './Home.module.scss';
-
-interface Weather {
-  id: number;
-  name: string;
-  dt: number;
-  main: {
-    temp: number;
-  };
-  weather: {
-    icon: string;
-    description: string;
-  }[];
-}
 
 interface City {
   lat: number;
@@ -27,7 +14,9 @@ interface City {
 }
 
 const Home: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [weather, setWeather] = useState<Weather | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedCityName, setSelectedCityName] = useState<string>('');
   const dispatch = useAppDispatch();
 
@@ -37,7 +26,7 @@ const Home: React.FC = () => {
     const { lat, lon, name } = city;
     setSelectedCityName(name);
     try {
-      const weatherData = await getWeather(lat, lon);
+      const weatherData = await getWeather(lat, lon, { cacheBuster: Date.now() });
       setWeather(weatherData);
       dispatch(addCityWeather({ ...weatherData, name }));
     } catch (error) {
@@ -45,21 +34,9 @@ const Home: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (selectedCityName) {
-      console.log('City chosen:', selectedCityName);
-    }
-  }, [selectedCityName]);
-
-  useEffect(() => {
-    if (weather) {
-      console.log('City weather data:', weather);
-    }
-  }, [weather]);
-
   return (
     <section className={styles.section}>
-      <CitySearch onCitySelect={handleCitySelect} />
+      <Search onCitySelect={handleCitySelect} />
 
       <ul className={styles.weatherList}>
         {cityList.map((city) => (
