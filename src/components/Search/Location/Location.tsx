@@ -1,17 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { MapPinIcon } from '@heroicons/react/24/solid';
-import { getWeather } from '../api/api.ts'; // Імпорт функції для отримання погоди
-import { addCityWeather } from '../redux/city/slice.ts'; // Екшен для додавання даних у Redux
+import { getWeather } from '../../../api/api.ts'; 
+import { addCityWeather } from '../../../redux/city/slice.ts';
 import styles from './Location.module.scss';
 
 const Location: React.FC = () => {
   const dispatch = useDispatch();
 
-  const handleLocationClick = () =>
-  {
-    
-    
+  const handleLocationClick = () => {
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser.');
       return;
@@ -28,10 +25,10 @@ const Location: React.FC = () => {
         }
 
         try {
-          const weatherData = await getWeather(latitude, longitude);
-          const cityName = weatherData.name || 'Unknown Location'; // Якщо назва міста недоступна
+          const weatherData = await getWeather(latitude, longitude, { cacheBuster: Date.now() });
+          const cityName = weatherData.name || 'Unknown Location';
           console.log(weatherData);
-          dispatch(addCityWeather({ ...weatherData, name: cityName })); // Додаємо в Redux
+          dispatch(addCityWeather({ ...weatherData, name: cityName }));
         } catch (error) {
           console.error('Error fetching weather by location:', error);
           alert('Failed to fetch weather data.');
@@ -42,9 +39,9 @@ const Location: React.FC = () => {
         alert('Permission to access location was denied.');
       },
       {
-        enableHighAccuracy: true, // Запит максимально точної локації
-        timeout: 10000, // Час очікування відповіді
-        maximumAge: 0, // Не використовувати кешовані дані
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
       }
     );
   };

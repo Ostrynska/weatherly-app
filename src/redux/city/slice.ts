@@ -1,18 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Weather {
-    wind: any;
+export interface Weather {
+    visibility: number;
     id: number;
     name: string;
     dt: number;
+    updatedAt: number;
+    coord: {
+        lat: number;
+        lon: number;
+    };
     main: {
-        feels_like(feels_like: any): import("react").ReactNode;
+        pressure: number;
+        humidity: number;
+        feels_like: number;
         temp: number;
     };
     weather: {
         icon: string;
         description: string;
     }[];
+    wind: {
+        speed: number;
+    };
+    sys: {
+        sunset: number;
+        sunrise: number;
+        country: string;
+    };
 }
 
 interface CityState {
@@ -38,25 +53,23 @@ const citySlice = createSlice({
                 state.cityList.push(newCity);
             }
         },
-updateCityWeather: (state, action: PayloadAction<Weather>) => {
-  const updatedCity = {
-    ...action.payload,
-    updatedAt: Date.now() / 1000,
-  };
+    updateCityWeather: (state, action: PayloadAction<Weather>) => {
+        const updatedCity = {
+            ...action.payload,
+            updatedAt: Date.now() / 1000,
+        };
 
-  const cityIndex = state.cityList.findIndex(
-    (city) => city.id === updatedCity.id
-  );
+        const cityIndex = state.cityList.findIndex(
+            (city) => city.id === updatedCity.id
+        );
 
-  if (cityIndex !== -1) {
-    state.cityList[cityIndex] = updatedCity;
-  }
-},
-
+        if (cityIndex !== -1) {
+            state.cityList[cityIndex] = updatedCity;
+        }
+    },
     },
 });
 
 export const { addCityWeather, updateCityWeather } = citySlice.actions;
 
 export default citySlice.reducer;
-

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../redux/hooks.ts';
-import { updateCityWeather } from '../redux/city/slice.ts';
-import { getWeather } from '../api/api.ts';
-import { formatUnixTimestamp } from '../utils/card/date-utils.ts';
+import { useAppDispatch } from '../../redux/hooks.ts';
+import { updateCityWeather, Weather } from '../../redux/city/slice.ts';
+import { getWeather } from '../../api/api.ts';
+import { formatUnixTimestamp } from '../../utils/card/date-utils.ts';
 import {
   ArrowPathIcon,
   EllipsisHorizontalIcon,
@@ -15,31 +15,10 @@ import { WiStrongWind } from 'react-icons/wi';
 
 import styles from './WeatherCard.module.scss';
 
-interface Weather {
-  coord: any;
-  id: number;
-  name: string;
-  dt: number;
-  sys: {
-    country: string;
-  };
-  main: {
-    temp: number;
-    feels_like: number;
-    humidity: number;
-  };
-  visibility: number;
-  wind: {
-    speed: number;
-  };
-  weather: {
-    icon: string;
-    description: string;
-  }[];
-}
 
 interface WeatherCardProps {
   weather: Weather;
+  selectedCityName: string;
 }
 
 const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
@@ -63,7 +42,6 @@ const handleReloadWeather = async () => {
     console.error('Error updating weather:', error);
   }
 };
-
 
   return (
     <li className={styles.card}>

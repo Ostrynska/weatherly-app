@@ -9,7 +9,7 @@ const SharedLayout: React.FC = () => {
     <>
       <Header />
       <main>
-        <Suspense fallback={"loading!"}>
+        <Suspense fallback={"Loading..."}>
           <Outlet />
         </Suspense>
       </main>

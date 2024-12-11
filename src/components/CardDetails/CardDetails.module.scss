@@ -1,0 +1,31 @@
+.cardDetails {
+    max-width: 1480px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+// @media (max-width: 768px) {
+//     .cardDetails {
+//         width: 1420px;
+//     }
+
+.information {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.summaryLeft {
+    display: flex;
+    flex-direction: column;
+        justify-content: center;
+    align-items: center;
+}
+
+.extendedForecast {
+    margin-top: 40px;
+}
+
+.extendedForecast .sectionTitle {
+    margin-bottom: 20px;
+}

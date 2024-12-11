@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<MainPage />} />
         <Route path=":id" element={<DetailsPage />} />
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="*" element={<div>Page not found</div>} />
       </Route>
     </Routes>
   );

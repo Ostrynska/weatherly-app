@@ -7,12 +7,14 @@ import {
   PointElement,
   LineElement,
   Tooltip,
+  ChartOptions,
 } from 'chart.js';
-import styles from './HourlyForecastGraph.module.scss';
+import { ClockIcon } from '@heroicons/react/20/solid';
+import styles from './HourlyForecast.module.scss';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
-interface HourlyForecastGraphProps {
+interface HourlyForecastProps {
   hourlyData: Array<{
     dt: number;
     main: { temp: number };
@@ -21,7 +23,7 @@ interface HourlyForecastGraphProps {
   }>;
 }
 
-const HourlyForecastGraph: React.FC<HourlyForecastGraphProps> = ({ hourlyData }) => {
+const HourlyForecast: React.FC<HourlyForecastProps> = ({ hourlyData }) => {
   if (!hourlyData || hourlyData.length === 0) {
     return <p>No data available for hourly forecast.</p>;
   }
@@ -30,6 +32,7 @@ const HourlyForecastGraph: React.FC<HourlyForecastGraphProps> = ({ hourlyData })
     labels: hourlyData.map((data) =>
       new Date(data.dt * 1000).toLocaleTimeString('en-GB', {
         hour: '2-digit',
+        minute: '2-digit',
       })
     ),
     datasets: [
@@ -38,7 +41,7 @@ const HourlyForecastGraph: React.FC<HourlyForecastGraphProps> = ({ hourlyData })
         data: hourlyData.map((data) => data.main.temp),
         borderColor: '#f5a623',
         backgroundColor: 'rgba(245, 166, 35, 0.2)',
-        fill: true,
+        fill: false,
         tension: 0.4,
         pointRadius: 5,
         pointHoverRadius: 7,
@@ -46,7 +49,7 @@ const HourlyForecastGraph: React.FC<HourlyForecastGraphProps> = ({ hourlyData })
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -59,34 +62,61 @@ const HourlyForecastGraph: React.FC<HourlyForecastGraphProps> = ({ hourlyData })
     },
     scales: {
       x: {
-        display: false, // Hide the x-axis
+        display: false,
       },
       y: {
-        display: false, // Hide the y-axis
+        display: false,
       },
     },
   };
 
-  const getIconUrl = (icon: string) =>
-    `https://openweathermap.org/img/wn/${icon}@2x.png`;
+  const temperatureLabelPlugin = {
+    id: 'temperatureLabel',
+    afterDatasetsDraw: (chart: any) => {
+      const { ctx, data, scales } = chart;
+      ctx.save();
+      const dataset = data.datasets[0];
+
+      dataset.data.forEach((value: any, index: number) => {
+        const x = scales.x.getPixelForValue(index);
+        const y = scales.y.getPixelForValue(value);
+
+        const text = `${Math.round(value)}°`;
+        ctx.font = 'bold 16px Arial';
+        ctx.fillStyle = '#FFF';
+        ctx.textAlign = 'center';
+
+        ctx.fillStyle = '#FFF';
+        ctx.fillText(text, x, y - 15);
+      });
+
+      ctx.restore();
+    },
+  };
+
+  const calculateYOffset = (index: number) => {
+    const baseOffset = -20;
+    const stepOffset = 20;
+    return baseOffset + (index % 2 === 0 ? 0 : stepOffset);
+  };
 
   return (
     <div className={styles.forecastContainer}>
       <h2 className={styles.title}>
-        <span role="img" aria-label="clock">
-          ⏰
-        </span>{' '}
-        24-Hour Forecast
+        <ClockIcon className={styles.iconTitle} /> 24-Hour Forecast
       </h2>
       <div className={styles.graphContainer}>
-        <Line data={data} options={options} />
+        <Line data={data} options={options} plugins={[temperatureLabelPlugin]} />
       </div>
       <div className={styles.forecastItems}>
         {hourlyData.map((data, index) => (
-          <div key={index} className={styles.forecastItem}>
-            <div className={styles.temperature}>{Math.round(data.main.temp)}°</div>
+          <div
+            key={index}
+            className={styles.forecastItem}
+            style={{ transform: `translateY(${calculateYOffset(index)}px)` }}
+          >
             <img
-              src={getIconUrl(data.weather[0].icon)}
+              src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
               alt="weather icon"
               className={styles.icon}
             />
@@ -96,6 +126,7 @@ const HourlyForecastGraph: React.FC<HourlyForecastGraphProps> = ({ hourlyData })
             <div className={styles.time}>
               {new Date(data.dt * 1000).toLocaleTimeString('en-GB', {
                 hour: '2-digit',
+                minute: '2-digit',
               })}
             </div>
           </div>
@@ -105,4 +136,4 @@ const HourlyForecastGraph: React.FC<HourlyForecastGraphProps> = ({ hourlyData })
   );
 };
 
-export default HourlyForecastGraph;
+export default HourlyForecast;
