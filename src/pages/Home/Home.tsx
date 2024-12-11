@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import CitySearch from '../../components/CitySearch.tsx';
 import WeatherCard from '../../components/WeatherCard.tsx';
 import { getWeather } from '../../api/api.ts';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
 import { addCityWeather } from '../../redux/city/slice.ts';
+
+import styles from './Home.module.scss';
 
 interface Weather {
   id: number;
@@ -30,16 +31,15 @@ const Home: React.FC = () => {
   const [selectedCityName, setSelectedCityName] = useState<string>('');
   const dispatch = useAppDispatch();
 
-  // Отримуємо список міст із Redux
   const cityList = useAppSelector((state) => state.city.cityList);
 
   const handleCitySelect = async (city: City) => {
     const { lat, lon, name } = city;
-    setSelectedCityName(name); // Оновлюємо місто
+    setSelectedCityName(name);
     try {
       const weatherData = await getWeather(lat, lon);
       setWeather(weatherData);
-      dispatch(addCityWeather({ ...weatherData, name })); // Додаємо дані погоди у Redux
+      dispatch(addCityWeather({ ...weatherData, name }));
     } catch (error) {
       console.error('Error fetching weather:', error);
     }
@@ -58,16 +58,15 @@ const Home: React.FC = () => {
   }, [weather]);
 
   return (
-    <div>
+    <section className={styles.section}>
       <CitySearch onCitySelect={handleCitySelect} />
 
-      {/* Відображаємо список міст як картки */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+      <ul className={styles.weatherList}>
         {cityList.map((city) => (
           <WeatherCard key={city.id} weather={city} selectedCityName={city.name} />
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 };
 

@@ -12,8 +12,6 @@ export const searchCities = async (cityName: string) => {
         appid: API_KEY,
       },
     });
-    console.log('response.data;', response.data);
-    
     return response.data;
   } catch (error) {
     console.error('Error fetching cities:', error);
@@ -21,7 +19,7 @@ export const searchCities = async (cityName: string) => {
   }
 };
 
-export const getWeather = async (lat, lon) => {
+export const getWeather = async (lat, lon, p0: { cacheBuster: number; }) => {
   const url = 'https://api.openweathermap.org/data/2.5/weather';
   try {
     const response = await axios.get(url, {

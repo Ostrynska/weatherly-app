@@ -1,13 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import CardDetails from '../../components/CardDetails.tsx';
+import styles from './Details.module.scss';
 
 const Details: React.FC = () => {
-  const { id } = useParams();
   return (
-    <div>
-      <h1>Detail Page </h1>
-      <p>Card ID: {id}</p>
-    </div>
+    <section className={styles.section}>
+      <CardDetails />
+    </section>
   );
 };
 

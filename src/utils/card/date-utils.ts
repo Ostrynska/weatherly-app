@@ -3,10 +3,14 @@ export const formatUnixTimestamp = (dt: number): string => {
   const options: Intl.DateTimeFormatOptions = {
     hour: '2-digit',
     minute: '2-digit',
-    weekday: 'long',
+    weekday: 'short',
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   };
-  return date.toLocaleString('en-GB', options);
+
+  const formattedDate = date.toLocaleString('en-GB', options);
+
+  const [weekday, ...rest] = formattedDate.split(', ');
+  return `${weekday} | ${rest.join(', ')}`;
 };

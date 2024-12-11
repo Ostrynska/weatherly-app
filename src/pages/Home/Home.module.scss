@@ -1,0 +1,21 @@
+.section {
+    height: 76vh;
+    width: 100%;
+    max-width: 1420px;
+}
+
+.weatherList {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    height: 65vh;
+    overflow-x: auto; 
+}
+
+.emptyList {
+    text-align: center;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}

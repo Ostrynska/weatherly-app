@@ -1,53 +1,134 @@
 .card {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    height: 250px;
-    border-radius: 15px;
-    display: flex;
-    color: transparent;
+    background: rgba(255, 255, 255, 0.1); /* Прозорий фон */
+  backdrop-filter: blur(10px); /* Ефект розмиття */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Легка рамка */
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.069);
+    box-sizing: border-box;
 }
 
-.temperature {
-    font-size: 80px;
-    font-weight: bold;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    color: black;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.degree {
-    font-size: 30px;
-    margin-left: 5px;
-    vertical-align: top;
+.cityInfo {
+  display: flex;
+  flex-direction: column;
 }
 
-.city {
-    font-size: 24px;
-    font-weight: 600;
-    margin: 10px 0;
-    color: black;
+.iconWithName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  gap: 10px;
 }
 
-.date {
-    font-size: 14px;
-    opacity: 0.8;
-    margin-bottom: 10px;
-    color: black;
+.weatherIcon {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
 }
 
-.icon {
-    font-size: 50px;
+.cityInfo h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cityInfo p {
+  font-size: 14px;
+  opacity: 0.8;
+  margin: 0;
 }
 
 .buttons {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menuButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .iconButton {
-    width: 24px;
-    height: 24px;
-    color: black;
-    margin-right: 10px;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+.iconButtonReload {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+
+.content {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.temperature {
+  display: flex;
+  align-items: flex-start; /* Вирівнює "°C" по верхньому краю */
+  justify-content: center; /* Вирівнює блок по центру */
+  gap: 5px; /* Відступ між числом і "°C" */
+  font-size: 80px;
+    // font-weight: bold; /* Жирний шрифт */
+  line-height: 1; /* Щільне розташування */
+}
+
+.tempValue {
+  line-height: 1; /* Щільне розташування */
+}
+
+.degree {
+  font-size: 18px; /* Розмір символу "°C" */
+  margin-top: 10px; /* Відступ від верхнього краю */
+  vertical-align: top; /* Вирівнювання по верхньому краю */
+  font-weight: 300;
+}
+
+.description {
+  font-size: 18px; /* Розмір тексту опису */
+  margin-top: 10px; /* Відступ від температури */
+  color: rgba(255, 255, 255, 0.8); /* Легка прозорість тексту */
+  text-transform: capitalize; /* Перша літера велика */
+}
+
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+//   gap: 10px;
+  justify-content: space-between;
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.iconDetail {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
 }

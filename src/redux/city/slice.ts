@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Weather {
+    wind: any;
     id: number;
     name: string;
     dt: number;
     main: {
+        feels_like(feels_like: any): import("react").ReactNode;
         temp: number;
     };
     weather: {
@@ -25,8 +27,7 @@ const citySlice = createSlice({
     name: 'city',
     initialState,
     reducers: {
-        addCityWeather: (state, action: PayloadAction<Weather & { name: string }>) =>
-        {
+        addCityWeather: (state, action: PayloadAction<Weather & { name: string }>) => {
             const newCity = action.payload;
 
             const existingCity = state.cityList.find(
@@ -34,12 +35,28 @@ const citySlice = createSlice({
             );
 
             if (!existingCity) {
-                state.cityList.push(newCity); // Додаємо нове місто
+                state.cityList.push(newCity);
             }
-        }
-    }
+        },
+updateCityWeather: (state, action: PayloadAction<Weather>) => {
+  const updatedCity = {
+    ...action.payload,
+    updatedAt: Date.now() / 1000,
+  };
+
+  const cityIndex = state.cityList.findIndex(
+    (city) => city.id === updatedCity.id
+  );
+
+  if (cityIndex !== -1) {
+    state.cityList[cityIndex] = updatedCity;
+  }
+},
+
+    },
 });
 
-export const { addCityWeather } = citySlice.actions;
+export const { addCityWeather, updateCityWeather } = citySlice.actions;
 
 export default citySlice.reducer;
+

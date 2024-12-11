@@ -7,11 +7,13 @@
   z-index: 1000;
 
   .content {
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 60px;
     height: 92px;
+    max-width: 1400px;
   }
 
   .left {
