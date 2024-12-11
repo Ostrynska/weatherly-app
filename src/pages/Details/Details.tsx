@@ -1,5 +1,5 @@
 import React from 'react';
-import CardDetails from '../../components/CardDetails/CardDetails.tsx';
+import CardDetails from '../../components/CardDetails/CardDetails';
 import styles from './Details.module.scss';
 
 const Details: React.FC = () => {

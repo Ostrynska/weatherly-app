@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { searchCities } from '../../api/api.ts';
-import Location from './Location/Location.tsx';
+import { searchCities } from '../../api/api';
+import Location from './Location/Location';
 import styles from './Search.module.scss';
 
 interface CityOption {

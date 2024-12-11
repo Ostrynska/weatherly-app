@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { MapPinIcon } from '@heroicons/react/24/solid';
-import { getWeather } from '../../../api/api.ts'; 
-import { addCityWeather } from '../../../redux/city/slice.ts';
+import { getWeather } from '../../../api/api';
+import { addCityWeather } from '../../../redux/city/slice';
 import styles from './Location.module.scss';
 
 const Location: React.FC = () => {

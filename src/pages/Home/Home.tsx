@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Search from '../../components/Search/Search.tsx';
-import WeatherCard from '../../components/WeatherCard/WeatherCard.tsx';
-import { getWeather } from '../../api/api.ts';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { addCityWeather, Weather } from '../../redux/city/slice.ts';
+import Search from '../../components/Search/Search';
+import WeatherCard from '../../components/WeatherCard/WeatherCard';
+import { getWeather } from '../../api/api';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addCityWeather, Weather } from '../../redux/city/slice';
 
 import styles from './Home.module.scss';
 
@@ -39,9 +39,9 @@ const Home: React.FC = () => {
       <Search onCitySelect={handleCitySelect} />
 
       <ul className={styles.weatherList}>
-        {cityList.map((city) => (
-          <WeatherCard key={city.id} weather={city} selectedCityName={city.name} />
-        ))}
+      {[...cityList].reverse().map((city) => (
+        <WeatherCard key={city.id} weather={city} selectedCityName={city.name} />
+      ))}
       </ul>
     </section>
   );

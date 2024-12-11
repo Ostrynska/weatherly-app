@@ -1,20 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/hooks.ts';
-import { updateCityWeather, Weather } from '../../redux/city/slice.ts';
-import { getWeather } from '../../api/api.ts';
-import { formatUnixTimestamp } from '../../utils/card/date-utils.ts';
+import { useAppDispatch } from '../../redux/hooks';
+import { updateCityWeather, removeCityWeather, Weather } from '../../redux/city/slice';
+import { getWeather } from '../../api/api';
+import { formatUnixTimestamp } from '../../utils/card/date-utils';
 import {
   ArrowPathIcon,
   EllipsisHorizontalIcon,
+  TrashIcon,
 } from '@heroicons/react/24/outline';
 import { AiOutlineEye } from 'react-icons/ai';
-import { LiaTemperatureLowSolid } from "react-icons/lia";
-import { MdWater } from "react-icons/md";
+import { LiaTemperatureLowSolid } from 'react-icons/lia';
+import { MdWater } from 'react-icons/md';
 import { WiStrongWind } from 'react-icons/wi';
 
 import styles from './WeatherCard.module.scss';
-
 
 interface WeatherCardProps {
   weather: Weather;
@@ -25,26 +25,29 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-const formattedDate = formatUnixTimestamp(weather.updatedAt || weather.dt);
-
+  const formattedDate = formatUnixTimestamp(weather.updatedAt || weather.dt);
 
   const handleDetailNavigation = () => {
     navigate(`/${weather.id}`);
   };
 
-const handleReloadWeather = async () => {
-  try {
-    const updatedWeather = await getWeather(weather.coord.lat, weather.coord.lon, {
-      cacheBuster: Date.now(),
-    });
-    dispatch(updateCityWeather(updatedWeather));
-  } catch (error) {
-    console.error('Error updating weather:', error);
-  }
-};
+  const handleReloadWeather = async () => {
+    try {
+      const updatedWeather = await getWeather(weather.coord.lat, weather.coord.lon, {
+        cacheBuster: Date.now(),
+      });
+      dispatch(updateCityWeather(updatedWeather));
+    } catch (error) {
+      console.error('Error updating weather:', error);
+    }
+  };
+
+  const handleDeleteWeather = () => {
+        dispatch(removeCityWeather(weather.id));
+    };
 
   return (
-    <li className={styles.card}>
+    <li className={`${styles.card}`}>
       <div className={styles.header}>
         <div className={styles.cityInfo}>
           <div className={styles.iconWithName}>
@@ -103,6 +106,13 @@ const handleReloadWeather = async () => {
           </li>
         </ul>
       </div>
+
+      <button
+        onClick={handleDeleteWeather}
+        className={`${styles.deleteButton} ${styles.hidden}`}
+      >
+        <TrashIcon className={styles.iconButtonDelete} />
+      </button>
     </li>
   );
 };

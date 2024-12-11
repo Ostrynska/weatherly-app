@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../redux/hooks.ts';
-import HourlyForecastGraph from './HourlyForecast/HourlyForecast.tsx';
-import Title from './Title/Title.tsx';
-import CurrentWeather from './CurrentWeather/CurrentWeather.tsx';
-import ConditionsList from './ConditionsList/ConditionsList.tsx';
+import { useAppSelector } from '../../redux/hooks';
+import HourlyForecastGraph from './HourlyForecast/HourlyForecast';
+import Title from './Title/Title';
+import CurrentWeather from './CurrentWeather/CurrentWeather';
+import ConditionsList from './ConditionsList/ConditionsList';
 import styles from './CardDetails.module.scss';
 
 const CardDetails: React.FC = () => {

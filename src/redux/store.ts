@@ -2,12 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import rootReducer from './reducers.ts';
+import rootReducer from './reducers';
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['city'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

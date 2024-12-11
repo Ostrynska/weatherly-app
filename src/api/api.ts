@@ -19,7 +19,7 @@ export const searchCities = async (cityName: string) => {
   }
 };
 
-export const getWeather = async (lat, lon, p0: { cacheBuster: number; }) => {
+export const getWeather = async (lat: number, lon: number, p0: { cacheBuster: number; }) => {
   const url = 'https://api.openweathermap.org/data/2.5/weather';
   try {
     const response = await axios.get(url, {
