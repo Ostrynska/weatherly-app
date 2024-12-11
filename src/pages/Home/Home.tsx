@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Search from '../../components/Search/Search.tsx';
 import WeatherCard from '../../components/WeatherCard/WeatherCard.tsx';
 import { getWeather } from '../../api/api.ts';
