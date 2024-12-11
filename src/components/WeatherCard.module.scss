@@ -1,52 +1,60 @@
 .card {
-    background: rgba(255, 255, 255, 0.1); /* Прозорий фон */
-  backdrop-filter: blur(10px); /* Ефект розмиття */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Легка рамка */
-  border-radius: 15px;
-  padding: 20px;
-  width: 100%;
-  max-width: 320px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.069);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(17, 12, 46, 0.016) 0px 48px 100px 0px;
     box-sizing: border-box;
+    transition: all 0.6s cubic-bezier(0.55, 0, 0.1, 1) 0s;
+    &:hover, &:focus {
+        box-shadow: rgba(0, 0, 0, 0.092) 0px 54px 55px,
+        rgba(0, 0, 0, 0.046) 0px -12px 30px,
+        rgba(0, 0, 0, 0.033) 0px 4px 6px,
+        rgba(0, 0, 0, 0.076) 0px 12px 13px,
+        rgba(0, 0, 0, 0.045) 0px -3px 5px;
+    }
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .cityInfo {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .iconWithName {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    gap: 10px;
 }
 
 .weatherIcon {
-  width: 40px;
-  height: 60px;
-  object-fit: cover;
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
 }
 
 .cityInfo h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .cityInfo p {
-  font-size: 14px;
-  opacity: 0.8;
-  margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 0;
 }
 
 .buttons {
@@ -56,79 +64,76 @@
 }
 
 .menuButton {
-  background: transparent;
-  border: none;
-  cursor: pointer;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .iconButton {
-  width: 24px;
-  height: 24px;
-  color: #fff;
+    width: 24px;
+    height: 24px;
+    color: #fff;
 }
 
 .iconButtonReload {
-  width: 18px;
-  height: 18px;
-  color: #fff;
+    width: 18px;
+    height: 18px;
+    color: #fff;
 }
 
 .content {
-  text-align: center;
-  margin: 20px 0;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .temperature {
-  display: flex;
-  align-items: flex-start; /* Вирівнює "°C" по верхньому краю */
-  justify-content: center; /* Вирівнює блок по центру */
-  gap: 5px; /* Відступ між числом і "°C" */
-  font-size: 80px;
-    // font-weight: bold; /* Жирний шрифт */
-  line-height: 1; /* Щільне розташування */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5px;
+    font-size: 80px;
+    line-height: 1;
 }
 
 .tempValue {
-  line-height: 1; /* Щільне розташування */
+    line-height: 1;
 }
 
 .degree {
-  font-size: 18px; /* Розмір символу "°C" */
-  margin-top: 10px; /* Відступ від верхнього краю */
-  vertical-align: top; /* Вирівнювання по верхньому краю */
-  font-weight: 300;
+    font-size: 18px;
+    margin-top: 10px;
+    vertical-align: top;
+    font-weight: 300;
 }
 
 .description {
-  font-size: 18px; /* Розмір тексту опису */
-  margin-top: 10px; /* Відступ від температури */
-  color: rgba(255, 255, 255, 0.8); /* Легка прозорість тексту */
-  text-transform: capitalize; /* Перша літера велика */
+    font-size: 18px;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: capitalize;
 }
 
-
 .footer {
-  display: flex;
-  flex-wrap: wrap;
-//   gap: 10px;
-  justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
-  ul {
+.footer ul {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-  }
 }
 
 .detail {
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  opacity: 0.8;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    opacity: 0.8;
 }
 
 .iconDetail {
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
 }
