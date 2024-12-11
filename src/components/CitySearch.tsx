@@ -56,19 +56,17 @@ const CitySearch: React.FC<CitySearchProps> = ({ onCitySelect }) => {
   const customStyles = {
     control: (provided: any) => ({
       ...provided,
-      backgroundColor: 'rgba(255, 255, 255, 0.1)', // Transparent white
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
       border: 'none',
       borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
-      borderRadius: '4px',
+      borderRadius: '10px',
       boxShadow: 'none',
       color: '#fff',
-      padding: '5px',
-
+      padding: '5px 0px 5px 30px'
     }),
     placeholder: (provided: any) => ({
       ...provided,
       color: '#f3e9e9',
-      padding: '2px 20px'
     }),
     singleValue: (provided: any) => ({
       ...provided,
@@ -82,20 +80,21 @@ const CitySearch: React.FC<CitySearchProps> = ({ onCitySelect }) => {
     dropdownIndicator: (provided: any) => ({
       ...provided,
       color: '#f3e9e9',
+      padding: '2px 20px'
     }),
     indicatorSeparator: () => ({
       display: 'none',
     }),
     menu: (provided: any) => ({
       ...provided,
-      backgroundColor: 'rgba(0, 0, 0, 0.8)', // Dropdown background
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
       border: '1px solid rgba(255, 255, 255, 0.3)',
-      borderRadius: '4px',
+      borderRadius: '10px',
     }),
     option: (provided: any, state: any) => ({
       ...provided,
       backgroundColor: state.isFocused
-        ? 'rgba(255, 255, 255, 0.2)' // Highlighted background
+        ? 'rgba(255, 255, 255, 0.2)'
         : 'transparent',
       color: '#fff',
       cursor: 'pointer',
