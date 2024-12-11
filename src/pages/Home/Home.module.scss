@@ -11,7 +11,7 @@
     gap: 2rem;
     justify-content: space-between;
     height: 65vh;
-    overflow-x: auto; 
+    overflow-x: auto;
 }
 
 .emptyList {
@@ -19,3 +19,33 @@
     font-size: 16px;
     color: rgba(255, 255, 255, 0.7);
 }
+
+    @media (max-width: 1400px) {
+        .section {
+            max-width: 1400px;
+        }
+        .weatherList {
+            gap: 1rem;
+            justify-content: space-around;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section {
+            max-width: 768px;
+        }
+        .weatherList {
+            gap: 1.5rem;
+            justify-content: space-evenly;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .section {
+            max-width: 480px;
+        }
+        .weatherList {
+            gap: 1rem;
+            justify-content: center;
+        }
+    }
