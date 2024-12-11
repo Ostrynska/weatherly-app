@@ -29,7 +29,15 @@
     .title {
       font-size: 20px;
       font-weight: 600;
+      color: #0f5190;
     }
+  }
+
+  .linksContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
 
   .nav {
@@ -42,9 +50,12 @@
       font-size: 16px;
       transition: color 0.3s;
 
-      &:hover {
+      &:hover, &:focus {
         color: #4c4c4c;
       }
+    }
+    .active {
+      border-bottom: 1.5px solid #105da6;
     }
   }
 }
@@ -54,9 +65,31 @@
     flex-direction: column;
     height: auto;
     padding: 10px;
-
+      .content {
+        max-width: 768px;
+        .title {
+          display: block;
+        }
+      }
     .nav {
       margin-top: 10px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 5px;
+      .content {
+        max-width: 480px;
+        .title {
+          display: none;
+        }
+  }
+    .nav {
+      margin-top: 5px;
     }
   }
 }
