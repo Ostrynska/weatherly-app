@@ -1,24 +1,20 @@
 .cardDetails {
-    max-width: 1480px;
     width: 100%;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-// @media (max-width: 768px) {
-//     .cardDetails {
-//         width: 1420px;
-//     }
-
 .information {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
+    max-width: 1420px;
 }
 
 .summaryLeft {
     display: flex;
     flex-direction: column;
-        justify-content: center;
+    justify-content: center;
     align-items: center;
 }
 
@@ -28,4 +24,23 @@
 
 .extendedForecast .sectionTitle {
     margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .cardDetails {
+        max-width: 768px;
+    }
+    .information {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardDetails {
+        max-width: 480px;
+    }
+    .information {
+        display: flex;
+        flex-direction: column;
+    }
 }

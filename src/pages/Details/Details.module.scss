@@ -3,14 +3,18 @@
     width: 100%;
     max-width: 1420px;
     overflow-x: auto;
-    @media (max-width: 768px) {
-        .section {
-            max-width: 768px;
-        }
-    }
-    @media (max-width: 480px) {
-        .section {
-            max-width: 480px;
-        }
+}
+
+@media (max-width: 768px) {
+    .section {
+        max-width: 768px;
     }
 }
+
+@media (max-width: 480px) {
+    .section {
+        max-width: 480px;
+    }
+}
+
+

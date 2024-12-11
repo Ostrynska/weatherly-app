@@ -37,7 +37,7 @@ const CardDetails: React.FC = () => {
     if (!city) {
         return (
         <div className={styles.center}>
-            <h1 className={styles.notFound}>City not found!</h1>
+            <h1 className={styles.notFound}>Page not found!</h1>
         </div>
         );
     }
@@ -53,7 +53,7 @@ const CardDetails: React.FC = () => {
     });
 
     return (
-        <section className={styles.cardDetails}>
+        <div className={styles.cardDetails}>
             <Title
             cityName={city.name}
             onBack={() => navigate(-1)}
@@ -80,7 +80,7 @@ const CardDetails: React.FC = () => {
             <div className={styles.extendedForecast}>
                 <HourlyForecastGraph hourlyData={hourlyForecast} />
             </div>
-        </section>
+        </div>
     );
 };
 

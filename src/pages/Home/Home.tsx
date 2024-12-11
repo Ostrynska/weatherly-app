@@ -37,12 +37,18 @@ const Home: React.FC = () => {
   return (
     <section className={styles.section}>
       <Search onCitySelect={handleCitySelect} />
-
-      <ul className={styles.weatherList}>
-      {[...cityList].reverse().map((city) => (
-        <WeatherCard key={city.id} weather={city} selectedCityName={city.name} />
-      ))}
-      </ul>
+      {cityList.length === 0 ? (
+          <div className={styles.emptyList}>
+          <p>No cities added yet.</p>
+          <p>Start by searching for a city!</p>
+          </div>
+        ) : (
+          <ul className={styles.weatherList}>
+            {[...cityList].reverse().map((city) => (
+              <WeatherCard key={city.id} weather={city} selectedCityName={city.name} />
+            ))}
+          </ul>
+      )}
     </section>
   );
 };
