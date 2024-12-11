@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Header from './Header/Header.tsx';
@@ -9,7 +9,9 @@ const SharedLayout: React.FC = () => {
     <>
       <Header />
       <main>
-        <Outlet />
+        <Suspense fallback={"loading!"}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
     </>
