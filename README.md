@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# Weatherly App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Objective:
+Develop a **Single Page Application (SPA)** to display weather information for selected cities.
 
-## Available Scripts
+![image](https://github.com/user-attachments/assets/b165b13f-eef6-4b2b-9e77-b01f3731699b)
 
-In the project directory, you can run:
+### Features:
 
-### `npm start`
+1. **City List with Weather Cards**:
+   - Display a list of cities as cards.
+   - Each card contains:
+     - Brief weather information.
+     - On click: shows detailed information, navigates to a detailed page or deletes card.
+   - A button to refresh the weather data for the specific city.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Add/Remove Cities**:
+   - Add new cities to the list. A request is sent to fetch the current weather, and the city is displayed immediately.
+   - Remove cities from the list.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Data Persistence**:
+   - Store the list of cities in **LocalStorage**.
+   - On page reload:
+     - Previously selected cities remain visible.
+     - Weather data is updated automatically.
 
-### `npm test`
+4. **Detailed Weather View** *(Bonus)*:
+   - Display a graphical representation of temperature based on its value using hourly forecasts for the current day.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://github.com/user-attachments/assets/73103f9a-af5b-458b-a202-7e60ad64217b)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Requirements:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **API Integration**:
+   - Use [Weather API](https://openweathermap.org/).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Technology Stack**:
+   - **React** with **TypeScript**.
+   - State management using **Redux + Redux-Thunk** *(Recommend: Redux Toolkit)*.
+   - **React Router** for navigation.
 
-### `npm run eject`
+3. **Styling**:
+   - Use a CSS preprocessor *(preferably SCSS)*.
+   - Mobile-first design.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Code Quality**:
+   - Clean, well-formatted code.
+   - Use **ESLint** and **Prettier** for linting and formatting.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. **Testing**:
+   - Cover key (WeaterCard) components with tests using **Jest**.
+   - Optionally, include **React Testing Library**.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+6. **Component Design**:
+   - Functional components with **React Hooks**.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### Repository:
+Find the full project and implementation details in the [GitHub Repository](https://github.com/Ostrynska/weatherly-app).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Installation and Setup:
 
-### Code Splitting
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Ostrynska/weatherly-app.git
+   cd weatherly-app
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-### Analyzing the Bundle Size
+3. **Set up environment variables**:
+   - Create a `.env` file in the root directory.
+   - Add your OpenWeather API key:
+     ```
+     REACT_APP_WEATHER_API_KEY=your_api_key_here
+     ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. **Run the app**:
+   ```bash
+   npm start
+   ```
 
-### Making a Progressive Web App
+5. **Run tests**:
+   ```bash
+   npm test
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Author:
+[Kateryna Ostrynska](https://github.com/Ostrynska)
