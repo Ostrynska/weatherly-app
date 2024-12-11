@@ -2,6 +2,9 @@
     height: 76vh;
     width: 100%;
     max-width: 1420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .weatherList {
@@ -9,15 +12,19 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    justify-content: space-between;
+    align-items: stretch;
+    justify-content: start;
     height: 62vh;
     overflow-x: auto;
+    width: 100%;
 }
 
 .emptyList {
+    margin-top: 60px;
     text-align: center;
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+    font-weight: 600;
+    color: #0f5190;
 }
 
     @media (max-width: 1400px) {
@@ -25,8 +32,8 @@
             max-width: 1400px;
         }
         .weatherList {
-            gap: 1rem;
-            justify-content: space-around;
+            justify-content: space-evenly;
+            gap: 4rem;
         }
     }
 
@@ -46,6 +53,6 @@
         }
         .weatherList {
             gap: 1rem;
-            justify-content: center;
+            justify-content: start;
         }
     }
